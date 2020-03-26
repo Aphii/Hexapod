@@ -2,7 +2,7 @@
 #define _MVMNTUPDATE_H__
 
 #include <stdbool.h>
-#define MVMNT_NBR 5
+#define MVMNT_NBR 6
 
 /* MOVEMENT */
 #define FOREACH_MVMNT(MVMNT) \
@@ -11,6 +11,7 @@
         MVMNT(BACKWARD)   \
         MVMNT(TURNING_RIGHT)  \
         MVMNT(TURNING_LEFT)  \
+        MVMNT(OVER)  \
 
 #define GENERATE_ENUM(ENUM) ENUM,
 #define GENERATE_STRING(STRING) #STRING,

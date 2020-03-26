@@ -24,7 +24,7 @@ bool isValidMvmnt(char *mvmnt) {
     if (mvmnt == NULL)
         return false;
     strToLowerCase(mvmnt);
-    if (strcmp(mvmnt, "stop") == 0 || strcmp(mvmnt, "forward") == 0 || \
+    if (strcmp(mvmnt, "stop") == 0 || strcmp(mvmnt, "over") == 0 || strcmp(mvmnt, "forward") == 0 || \
 strcmp(mvmnt, "backward") == 0 || strcmp(mvmnt, "turning_right") == 0 || strcmp(mvmnt, "turning_left") == 0)
         return true;
     return false;
@@ -43,18 +43,32 @@ MOVEMENT getFromIndex(int id)
             return TURNING_RIGHT;
         case 4:
             return TURNING_LEFT;
+        case 5:
+            return OVER;
         break;
     }
     return STOP;
 }
 
-MOVEMENT stringToEnumMovement(char *str)
+MOVEMENT stringToEnumMovement(char *mvmnt)
 {
    /* for (int i = 0; i < MVMNT_NBR; i++) {
         char *mvmnt = MVMNT_STRING[getFromIndex(i)];
         if (strcmp(str, mvmnt) == 0)
             return getFromIndex(i);
     } */
+    if (strcmp(mvmnt, "stop") == 0 )
+        return STOP;
+    if (strcmp(mvmnt, "over") == 0 )
+        return OVER;
+    if (strcmp(mvmnt, "forward") == 0 )
+        return FORWARD;
+    if (strcmp(mvmnt, "backward") == 0 )
+        return BACKWARD;
+    if (strcmp(mvmnt, "turning_right") == 0 )
+        return TURNING_RIGHT;
+    if (strcmp(mvmnt, "turning_left") == 0 )
+        return TURNING_LEFT;
     return STOP;
 }
 
@@ -64,8 +78,8 @@ MOVEMENT getMvmnt(char *requestedMvmnt, MOVEMENT currentMovement) {
         MOVEMENT mvmnt = stringToEnumMovement(requestedMvmnt);
         return (mvmnt);
     }
-    fprintf( stderr, "%s is not a valid movement command.\n Please retry with one of the following :\
-\n\t-STOP\n\t-FORWARD\n\t-BACKWARD\n\t-TURNING_RIGHT\n\t-TURNING_LEFT\n\n", requestedMvmnt);
+    fprintf( stderr, "%s is not a valid movement command.\nHexapod current movement is %s.\n Please retry with one of the following :\
+\n\t-STOP\n\t-FORWARD\n\t-BACKWARD\n\t-TURNING_RIGHT\n\t-TURNING_LEFT\n\t-OVER (to stop program)\n\n", requestedMvmnt, MVMNT_STRING[currentMovement]);
     return (currentMovement);
 }
 
@@ -76,9 +90,7 @@ MOVEMENT mvmntUpdate(MOVEMENT currentMovement) {
     struct pollfd input[1] = {{fd: 0, events: POLLIN}};
     char buff[100];
     ret_poll = poll(input, 1, 2);
-    printf("ret_poll:\t%d\nerrno:\t%d\nstrerror:\t%s\n", ret_poll, errno, strerror(errno));
     ret_read = read(0, buff, 99);
-    printf("ret_read:\t%zd\nerrno:\t%d\nstrerror:\t%s\nbuff:\t%s\n", ret_read, errno, strerror(errno), buff);
     char *requestedMvmnt = malloc(sizeof(char) * (ret_read - 1));
     if (requestedMvmnt == NULL)
         return STOP;

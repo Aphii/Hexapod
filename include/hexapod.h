@@ -6,7 +6,6 @@
 #define _HEXAPOD_H_
 
 #define ERROR 84
-#define OVER 1
 #define LEGS_NBR 6
 
 

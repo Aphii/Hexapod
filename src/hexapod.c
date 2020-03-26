@@ -29,12 +29,13 @@ void printMotorsValue(hexapod_t *hexapod)
     }
 }
 
-/* updates hexapod */
+/* tmp updates hexapod */
 int update(hexapod_t *hexapod) {
     printMotorsValue(hexapod);
     if (hexapod == NULL)
         return ERROR;
     hexapod->currentMovement = mvmntUpdate(hexapod->currentMovement);
-    printf("mvmnt is : %s\n", MVMNT_STRING[hexapod->currentMovement]);
+    if (hexapod->currentMovement == OVER)
+        return 1;
     return 0;
 }
