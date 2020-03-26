@@ -11,6 +11,7 @@ SRC_FILES	=	main.c		\
 				hexapod.c	\
 				mvmntUpdate.c \
 				mvmntController.c \
+				angleArray.c \
 
 SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 
