@@ -25,8 +25,8 @@ void printMotorsValue(hexapod_t *hexapod)
         return;
     for (int i = 0; i < LEGS_NBR; i++) {
         printf("Leg[%d] motor A: %d\n", i, hexapod->legs[i].motorValue[0]);
-        printf("Leg[%d] motor A: %d\n", i, hexapod->legs[i].motorValue[1]);
-        printf("Leg[%d] motor A: %d\n", i, hexapod->legs[i].motorValue[2]);
+        printf("Leg[%d] motor B: %d\n", i, hexapod->legs[i].motorValue[1]);
+        printf("Leg[%d] motor C: %d\n", i, hexapod->legs[i].motorValue[2]);
     }
     hexapod->angleArray = initAngleArray();
 }
