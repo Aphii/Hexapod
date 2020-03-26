@@ -1,6 +1,36 @@
 #include <stdio.h>
 #include "mvmntController.h"
 
+
+void initMovementArray()
+{
+    mvmntTable mvmntArray[6];
+    mvmntArray[0].currentMovement = STOP;
+    mvmntArray[0].angleValue[0] = 0;
+    mvmntArray[0].angleValue[0] = 0;
+    mvmntArray[0].angleValue[0] = 0;
+    mvmntArray[1].currentMovement = FORWARD;
+    mvmntArray[0].angleValue[0] = 10;
+    mvmntArray[0].angleValue[0] = 10;
+    mvmntArray[0].angleValue[0] = 10;
+    mvmntArray[2].currentMovement = BACKWARD;
+    mvmntArray[0].angleValue[0] = 20;
+    mvmntArray[0].angleValue[0] = 20;
+    mvmntArray[0].angleValue[0] = 20;
+    mvmntArray[3].currentMovement = TURNING_RIGHT;
+    mvmntArray[0].angleValue[0] = 30;
+    mvmntArray[0].angleValue[0] = 30;
+    mvmntArray[0].angleValue[0] = 30;
+    mvmntArray[4].currentMovement = TURNING_LEFT;
+    mvmntArray[0].angleValue[0] = 40;
+    mvmntArray[0].angleValue[0] = 40;
+    mvmntArray[0].angleValue[0] = 40;
+    mvmntArray[5].currentMovement = OVER;
+    mvmntArray[0].angleValue[0] = 50;
+    mvmntArray[0].angleValue[0] = 50;
+    mvmntArray[0].angleValue[0] = 50;
+}
+
 /* mvmntController
  * @params enum MOVEMENT - current movement
  * @return
@@ -8,6 +38,7 @@
 void mvmntController(hexapod_t *hexapod)
     //modify motor's angle value depending on currentMovement
 {
+
     printf("changing motors values \n");
     for (int i = 0; i < LEGS_NBR; i++) {
         hexapod->legs[i].motorValue[0] = 10; //replace 10 by value from an array

@@ -28,5 +28,6 @@ typedef enum MVMNT_ENUM MOVEMENT;
 
 /* prototypes of functions*/
 MOVEMENT mvmntUpdate(MOVEMENT currentMovement);
-
+MOVEMENT getFromIndex(int id);
+MOVEMENT stringToEnumMovement(char *mvmnt);
 #endif
