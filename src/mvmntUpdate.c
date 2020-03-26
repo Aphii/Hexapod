@@ -35,19 +35,19 @@ MOVEMENT getFromIndex(int id)
 
 MOVEMENT stringToEnumMovement(char *str)
 {
- /*   for (int i = 0; i < MVMNT_NBR; i++) {
+    for (int i = 0; i < MVMNT_NBR; i++) {
         char *mvmnt = MVMNT_STRING[getFromIndex(i)];
         if (strcmp(str, mvmnt) == 0)
             return getFromIndex(i);
     }
-    */return STOP;
+    return STOP;
 }
 
 MOVEMENT getMvmnt(char *requestedMvmnt, MOVEMENT currentMovement) {
 //get a MOVEMENT from a string
     if (isValidMvmnt(requestedMvmnt)) {
-        MOVEMENT mvmnt = stringToEnumMovement(requestedMvmnt);
-        return (mvmnt);
+      //  MOVEMENT mvmnt = stringToEnumMovement(requestedMvmnt);
+        //return (mvmnt);
     }
     fprintf( stderr, "%s is not a valid movement command.\n Please retry with one of the following :\
 \n\t-STOP\n\t-FORWARD\n\t-BACKWARD\n\t-TURNING_RIGHT\n\t-TURNING_LEFT\n\n", requestedMvmnt);

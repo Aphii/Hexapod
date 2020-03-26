@@ -8,23 +8,32 @@ hexapod_t *start(void) {
     hexapod_t *hexapod = malloc(sizeof(hexapod_t));
     if (hexapod == NULL)
         exit(ERROR);
-  /*  hexapod->legs[5] = {{0, STOP, {0,0,0}},
-                        {1, STOP, {0,0,0}},
-                        {2, STOP, {0,0,0}},
-                        {3, STOP, {0,0,0}},
-                        {4, STOP, {0,0,0}},
-                        {5, STOP, {0,0,0}}}; // init array to stop movement */
     hexapod->legs[0].id = 0;
-    hexapod->legs[0].motorValue[0] = 0;
-    hexapod->legs[0].motorValue[1] = 0;
-    hexapod->legs[0].motorValue[2] = 0;
+    for (int i = 0; i < LEGS_NBR; i++) {
+        hexapod->legs[i].motorValue[0] = 0;
+        hexapod->legs[i].motorValue[1] = 0;
+        hexapod->legs[i].motorValue[2] = 0;
+    }
     hexapod->currentMovement = STOP;
     return hexapod;
 }
 
+void printMotorsValue(hexapod_t *hexapod)
+{
+    if (hexapod == NULL)
+        return;
+    for (int i = 0; i < LEGS_NBR; i++) {
+        printf("Leg[%d] motor A: %d\n", i, hexapod->legs[i].motorValue[0]);
+        printf("Leg[%d] motor A: %d\n", i, hexapod->legs[i].motorValue[1]);
+        printf("Leg[%d] motor A: %d\n", i, hexapod->legs[i].motorValue[2]);
+    }
+}
+
 /* updates hexapod */
 int update(hexapod_t *hexapod) {
-    printf("debug 00");
+    printMotorsValue(hexapod);
+    if (hexapod == NULL)
+        return ERROR;
     hexapod->currentMovement = mvmntUpdate(hexapod->currentMovement);
     printf("mvmnt is : %s\n", MVMNT_STRING[hexapod->currentMovement]);
     return 0;

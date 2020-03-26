@@ -20,7 +20,7 @@ typedef struct Leg_t  Leg;
 /* HEXAPOD */
 
 struct hexapod_t {
-    Leg legs[5]; //declarer value 5 ou malloc ?
+    Leg legs[6]; //declarer value 5 ou malloc ?
     MOVEMENT currentMovement;
 };
 typedef struct hexapod_t hexapod_t;
