@@ -1,4 +1,5 @@
 #include "hexapod.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 /* initializes hexapod */
@@ -23,6 +24,8 @@ hexapod_t *start(void) {
 
 /* updates hexapod */
 int update(hexapod_t *hexapod) {
-  //  hexapod->currentMovement = mvmntUpdate(hexapod->currentMovement);
+    printf("debug 00");
+    hexapod->currentMovement = mvmntUpdate(hexapod->currentMovement);
+    printf("mvmnt is : %s\n", MVMNT_STRING[hexapod->currentMovement]);
     return 0;
 }
