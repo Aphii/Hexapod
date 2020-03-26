@@ -8,6 +8,7 @@
 void mvmntController(hexapod_t *hexapod)
     //modify motor's angle value depending on currentMovement
 {
+    printf("changing motors values \n");
 
   /*  for (int i = 0; i < LEGS_NBR;  i++) {
         rotateMotor(hexapod, i);
@@ -25,7 +26,6 @@ void rotateMotor(hexapod_t *hexapod, int id)
 {
     if (hexapod == NULL)
         return;
-    printf("changing motors vlaues \n");
     /* tmp :/ comment faire pour que dynamiquement en fonction du current mvmnt ça prenne le bon tableau de valeur
     hexapod->legs[id].motorValue[0] = 10; //= mvmntArray[currentMovement].id ou mvmntArray(currentMovement).id
     hexapod->legs[id].motorValue[1] = 10; //= mvmntArray[currentMovement].id ou mvmntArray(currentMovement).id

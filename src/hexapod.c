@@ -1,6 +1,7 @@
-#include "hexapod.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "hexapod.h"
+#include "mvmntController.h"
 
 /* initializes hexapod */
 hexapod_t *start(void) {
@@ -37,5 +38,6 @@ int update(hexapod_t *hexapod) {
     hexapod->currentMovement = mvmntUpdate(hexapod->currentMovement);
     if (hexapod->currentMovement == OVER)
         return 1;
+    mvmntController(hexapod);
     return 0;
 }
