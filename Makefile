@@ -10,6 +10,7 @@ SRC_DIR		=	$(realpath src)
 SRC_FILES	=	main.c		\
 				hexapod.c	\
 				mvmntUpdate.c \
+				mvmntController.c \
 
 SRC		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES)) \
 

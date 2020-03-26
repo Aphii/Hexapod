@@ -4,7 +4,7 @@
 
 struct MvmntTable_t {
     MOVEMENT currentMovement;
-    int motorsValue;
+    int motorsValue[6][3];
 };
 
 #define STOP_ARRAY {{0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}, {0,0,0}}
