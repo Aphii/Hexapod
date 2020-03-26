@@ -8,11 +8,26 @@
 #include <errno.h>
 #include <string.h>
 #include <unistd.h>
+#include <ctype.h>
+#include <stdlib.h>
 #include "mvmntUpdate.h"
 
-bool isValidMvmnt(char * mvmnt) {
-    //check if entry if either stop forward ...
-    return true;
+void strToLowerCase(char *str)
+{
+    for(int i = 0; str[i]; i++){
+        str[i] = tolower(str[i]);
+    }
+}
+
+bool isValidMvmnt(char *mvmnt) {
+    //check if input mvmnt is a valid command
+    if (mvmnt == NULL)
+        return false;
+    strToLowerCase(mvmnt);
+    if (strcmp(mvmnt, "stop") == 0 || strcmp(mvmnt, "forward") == 0 || \
+strcmp(mvmnt, "backward") == 0 || strcmp(mvmnt, "turning_right") == 0 || strcmp(mvmnt, "turning_left") == 0)
+        return true;
+    return false;
 }
 
 MOVEMENT getFromIndex(int id)
@@ -35,19 +50,19 @@ MOVEMENT getFromIndex(int id)
 
 MOVEMENT stringToEnumMovement(char *str)
 {
-    for (int i = 0; i < MVMNT_NBR; i++) {
+   /* for (int i = 0; i < MVMNT_NBR; i++) {
         char *mvmnt = MVMNT_STRING[getFromIndex(i)];
         if (strcmp(str, mvmnt) == 0)
             return getFromIndex(i);
-    }
+    } */
     return STOP;
 }
 
 MOVEMENT getMvmnt(char *requestedMvmnt, MOVEMENT currentMovement) {
 //get a MOVEMENT from a string
     if (isValidMvmnt(requestedMvmnt)) {
-      //  MOVEMENT mvmnt = stringToEnumMovement(requestedMvmnt);
-        //return (mvmnt);
+        MOVEMENT mvmnt = stringToEnumMovement(requestedMvmnt);
+        return (mvmnt);
     }
     fprintf( stderr, "%s is not a valid movement command.\n Please retry with one of the following :\
 \n\t-STOP\n\t-FORWARD\n\t-BACKWARD\n\t-TURNING_RIGHT\n\t-TURNING_LEFT\n\n", requestedMvmnt);
@@ -56,7 +71,6 @@ MOVEMENT getMvmnt(char *requestedMvmnt, MOVEMENT currentMovement) {
 
 MOVEMENT mvmntUpdate(MOVEMENT currentMovement) {
 //update robot movement depending on user inputs
-    char *requestedMvmnt = NULL;
     int ret_poll;
     ssize_t ret_read;
     struct pollfd input[1] = {{fd: 0, events: POLLIN}};
@@ -65,5 +79,11 @@ MOVEMENT mvmntUpdate(MOVEMENT currentMovement) {
     printf("ret_poll:\t%d\nerrno:\t%d\nstrerror:\t%s\n", ret_poll, errno, strerror(errno));
     ret_read = read(0, buff, 99);
     printf("ret_read:\t%zd\nerrno:\t%d\nstrerror:\t%s\nbuff:\t%s\n", ret_read, errno, strerror(errno), buff);
+    char *requestedMvmnt = malloc(sizeof(char) * (ret_read - 1));
+    if (requestedMvmnt == NULL)
+        return STOP;
+    for (int i = 0; i < (ret_read - 1); i++) {
+        requestedMvmnt[i] = buff[i];
+    }
     return getMvmnt(requestedMvmnt, currentMovement);
 }
