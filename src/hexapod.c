@@ -5,10 +5,14 @@
 
 /* initializes hexapod */
 hexapod_t *start(void) {
-    //must init mvmntTableArray
     hexapod_t *hexapod = malloc(sizeof(hexapod_t));
     if (hexapod == NULL)
         exit(ERROR);
+    for (int i = 0; i < LEGS_NBR; i++) {
+        hexapod->legs[i].motorValue[0] = 0;
+        hexapod->legs[i].motorValue[1] = 0;
+        hexapod->legs[i].motorValue[2] = 0;
+    }
     hexapod->angleArray = initAngleArray();
     hexapod->currentMovement = STOP;
     return hexapod;
