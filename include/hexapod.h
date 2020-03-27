@@ -9,7 +9,6 @@
 
 /* LEGS */
 struct Leg_t {
-    int id;
     int motorValue[3];
 };
 typedef struct Leg_t  Leg;

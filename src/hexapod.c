@@ -9,12 +9,7 @@ hexapod_t *start(void) {
     hexapod_t *hexapod = malloc(sizeof(hexapod_t));
     if (hexapod == NULL)
         exit(ERROR);
-    hexapod->legs[0].id = 0;
-    for (int i = 0; i < LEGS_NBR; i++) {
-        hexapod->legs[i].motorValue[0] = 0;
-        hexapod->legs[i].motorValue[1] = 0;
-        hexapod->legs[i].motorValue[2] = 0;
-    }
+    hexapod->angleArray = initAngleArray();
     hexapod->currentMovement = STOP;
     return hexapod;
 }
@@ -28,7 +23,6 @@ void printMotorsValue(hexapod_t *hexapod)
         printf("Leg[%d] motor B: %d\n", i, hexapod->legs[i].motorValue[1]);
         printf("Leg[%d] motor C: %d\n", i, hexapod->legs[i].motorValue[2]);
     }
-    hexapod->angleArray = initAngleArray();
 }
 
 /* tmp updates hexapod */
