@@ -25,5 +25,6 @@ typedef struct hexapod_t hexapod_t;
 /* prototypes of functions*/
 hexapod_t *start(void);
 int update(hexapod_t *hexapod);
+void printMotorsValue(hexapod_t *hexapod);
 
 #endif
